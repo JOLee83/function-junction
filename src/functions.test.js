@@ -125,7 +125,7 @@ function rovarspraket(x) {
 	if (isNaN(x)) {
 		let x2 = x.split('')
 		let x3 = ''
-		x2.forEach(function(letter) {
+		x2.forEach(function (letter) {
 			if (!!~'aeiou'.indexOf(letter)) {
 				x3 += letter
 			} else {
@@ -176,7 +176,14 @@ function findLongestWord(string) {
 function remove(s) {
 	return s.split('!').join('') + '!'
 }
-
+// C# version
+// public class Kata
+// {
+//   public static string Remove(string s)
+//   {
+//     return s.Remove("!", "") + "!";
+//     }
+// }
 // ...
 
 /**
