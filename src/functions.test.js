@@ -184,6 +184,51 @@ function remove(s) {
 //     return s.Remove("!", "") + "!";
 //     }
 // }
+
+
+
+
+// using System;
+// public class Kata
+// {
+//   public static string Remove(string s)
+//   {
+// //     s = s.Replace("!", String.Empty);
+//     var bangCounter = 0;
+//     foreach (var letter in s)
+//     {
+//       if (letter == '!')
+//       {
+//         bangCounter++;
+//       }
+//       else
+//       {
+//         bangCounter = 0;
+//       }
+//     }  
+//     return s.Replace("!", String.Empty) + new String('!', bangCounter);
+//   }
+// }
+
+// namespace Solution {
+//   using NUnit.Framework;
+//   using System;
+
+//   [TestFixture]
+//   public class SolutionTest
+//   {
+//     [Test, Description("It should work for basic tests")]
+//     public void SampleTest()
+//     {
+//       Assert.AreEqual("Hi!", Kata.Remove("Hi!"));
+//       Assert.AreEqual("Hi!!!", Kata.Remove("Hi!!!"));
+//       Assert.AreEqual("Hi", Kata.Remove("!Hi"));
+//       Assert.AreEqual("Hi!", Kata.Remove("!Hi!"));
+//       Assert.AreEqual("Hi Hi!", Kata.Remove("Hi! Hi!"));
+//       Assert.AreEqual("Hi", Kata.Remove("Hi"));
+//     }
+//   }
+// }
 // ...
 
 /**
