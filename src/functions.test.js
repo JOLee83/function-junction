@@ -309,6 +309,11 @@ function smallEnough(a, limit) {
 		return true
 	}
 }
+
+const largestArrangement = array => {
+	let maxCombine = (a) => +(a.sort((x, y) => +("" + y + x) - +("" + x + y)).join(''));
+	return [array].map(maxCombine).pop()
+}
 // ...
 
 /**
@@ -404,10 +409,18 @@ test('longest()', t => {
 	t.is(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
 })
 
-teste("smallEnough()", t => {
+test("smallEnough()", t => {
 	t.is(smallEnough([66, 101], 200), true);
 	t.is(smallEnough([78, 117, 110, 99, 104, 117, 107, 115], 100), false);
 	t.is(smallEnough([101, 45, 75, 105, 99, 107], 107), true);
 	t.is(smallEnough([80, 117, 115, 104, 45, 85, 112, 115], 120), true);
+})
+
+test("largestArrangement()", t => {
+	t.is(largestArrangement([8, 6, 590, 70]), 8706590)
+	t.is(largestArrangement([6, 73, 79, 356, 7]), 797736356)
+	t.is(largestArrangement([64, 29, 5, 9, 982, 3]), 9982645329)
+	t.is(largestArrangement([3487, 103559, 243]), 3487243103559)
+	t.is(largestArrangement([7, 78, 79, 72, 709, 7, 94]), 9479787772709)
 })
 /* eslint-enable */
