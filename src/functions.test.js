@@ -295,6 +295,20 @@ function longest(s1, s2) {
 	});
 	return s3.sort().join("")
 }
+
+function smallEnough(a, limit) {
+	let counter = 0
+	a.map(b => {
+		if (b > limit) {
+			counter++
+		}
+	})
+	if (counter > 0) {
+		return false
+	} else {
+		return true
+	}
+}
 // ...
 
 /**
@@ -383,11 +397,17 @@ test('findOutlier()', t => {
 	t.is(findOutlier([0, 0, 3, 0, 0]), 3)
 	t.is(findOutlier([1, 1, 0, 1, 1]), 0)
 })
-Test.describe("longest", function () {
-	Test.it("Basic tests", function () {
-		Test.assertEquals(longest("aretheyhere", "yestheyarehere"), "aehrsty")
-		Test.assertEquals(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
-		Test.assertEquals(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
-	})
+
+test('longest()', t => {
+	t.is(longest("aretheyhere", "yestheyarehere"), "aehrsty")
+	t.is(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
+	t.is(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
+})
+
+teste("smallEnough()", t => {
+	t.is(smallEnough([66, 101], 200), true);
+	t.is(smallEnough([78, 117, 110, 99, 104, 117, 107, 115], 100), false);
+	t.is(smallEnough([101, 45, 75, 105, 99, 107], 107), true);
+	t.is(smallEnough([80, 117, 115, 104, 45, 85, 112, 115], 120), true);
 })
 /* eslint-enable */
