@@ -229,6 +229,72 @@ function remove(s) {
 //     }
 //   }
 // }
+
+function alphabetWar(fight) {
+	let count = 0
+	let hits = fight.split('').map(hit => {
+		if (hit === "w") {
+			count += 4
+		}
+		if (hit === "m") {
+			count -= 4
+		}
+		if (hit === "p") {
+			count += 3
+		}
+		if (hit === "q") {
+			count -= 3
+		}
+		if (hit === "b") {
+			count += 2
+		}
+		if (hit === "d") {
+			count -= 2
+		}
+		if (hit === "s") {
+			count += 1
+		}
+		if (hit === "z") {
+			count -= 1
+		}
+	})
+	if (count < 0) {
+		return "Right side wins!"
+	}
+	if (count > 0) {
+		return "Left side wins!"
+	} else {
+		return "Let's fight again!";
+	}
+}
+function findOutlier(integers) {
+	let odd = 0
+	let even = 0
+	let countE = 0
+	let countO = 0
+	integers.map(x => {
+		if (x % 2 == 0) {
+			even = x
+			countE++
+		} else {
+			odd = x
+			countO++
+		}
+	})
+	if (countE < countO) {
+		return even
+	} else {
+		return odd
+	}
+}
+
+function longest(s1, s2) {
+	let s = s1 + s2
+	let s3 = s.split("").filter(function (item, index) {
+		return s.indexOf(item) >= index;
+	});
+	return s3.sort().join("")
+}
 // ...
 
 /**
@@ -304,4 +370,24 @@ test('remove()', t => {
 	t.is(remove('Hi'), 'Hi!')
 })
 
+test('alphabetWar()', t => {
+	t.is(alphabetWar("z"), "Right side wins!")
+	t.is(alphabetWar("zdqmwpbs"), "Let's fight again!")
+	t.is(alphabetWar("zzzzs"), "Right side wins!")
+	t.is(alphabetWar("wwwwww"), "Left side wins!")
+})
+test('findOutlier()', t => {
+	t.is(findOutlier([0, 1, 2]), 1)
+	t.is(findOutlier([1, 2, 3]), 2)
+	t.is(findOutlier([2, 6, 8, 10, 3]), 3)
+	t.is(findOutlier([0, 0, 3, 0, 0]), 3)
+	t.is(findOutlier([1, 1, 0, 1, 1]), 0)
+})
+Test.describe("longest", function () {
+	Test.it("Basic tests", function () {
+		Test.assertEquals(longest("aretheyhere", "yestheyarehere"), "aehrsty")
+		Test.assertEquals(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
+		Test.assertEquals(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
+	})
+})
 /* eslint-enable */
