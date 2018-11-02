@@ -314,6 +314,77 @@ const largestArrangement = array => {
 	let maxCombine = (a) => +(a.sort((x, y) => +("" + y + x) - +("" + x + y)).join(''));
 	return [array].map(maxCombine).pop()
 }
+
+var sum_pairs = function (ints, s) {
+	let answer;
+	let newLength;
+	for (let i = 0; i < ints.length; i++) {
+		for (let k = i + 1; k < ints.length; k++) {
+			if (ints[i] + ints[k] == s) {
+				if (answer == null) {
+					answer = ints.filter(int => int === ints[i] || int === ints[k])
+					newLength = ints[i] - ints[k]
+				}
+				if (answer != null && newLength > ints[i] - ints[k]) {
+					answer = ints.filter(int => int === ints[i] || int === ints[k])
+				}
+			}
+		}
+	}
+	console.log(answer)
+	if (answer) {
+		return answer
+	} else {
+		return undefined
+	}
+}
+/*
+l1= [1, 4, 8, 7, 3, 15];
+l2= [1, -2, 3, 0, -6, 1];
+l3= [20, -13, 40];
+l4= [1, 2, 3, 4, 1, 0];
+l5= [10, 5, 2, 3, 7, 5];
+l6= [4, -2, 3, 3, 4];
+l7= [0, 2, 0];
+l8= [5, 9, 13, -3];
+
+Test.describe("Testing For Sum of Pairs", function(){
+Test.expect(sum_pairs(l1, 8)+"" == [1, 7]+"", "Basic: ["+l1+"] should return [1, 7] for sum = 8");
+Test.expect(sum_pairs(l2, -6)+"" == [0, -6]+"", "Negatives: ["+l2+"] should return [0, -6] for sum = -6");
+Test.expect(sum_pairs(l3, -7) == undefined, "No Match: ["+l3+"] should return undefined for sum = -7");
+Test.expect(sum_pairs(l4, 2)+"" == [1, 1]+"", "First Match From Left: ["+l4+"] should return [1, 1] for sum = 2 ");
+Test.expect(sum_pairs(l5, 10)+"" == [3, 7]+"", "First Match From Left REDUX!: ["+l5+"] should return [3, 7] for sum = 10 ");
+Test.expect(sum_pairs(l6, 8)+"" == [4, 4]+"", "Duplicates: ["+l6+"] should return [4, 4] for sum = 8");
+Test.expect(sum_pairs(l7, 0)+"" == [0, 0]+"", "Zeroes: ["+l7+"] should return [0, 0] for sum = 0");
+Test.expect(sum_pairs(l8, 10)+"" == [13, -3]+"", "Subtraction: ["+l8+"] should return [13, -3] for sum = 10");
+});*/
+function moveTen(s) {
+	return s.split("").map(x => {
+		let y = x.charCodeAt() + 10
+		if (y < 123) {
+			return String.fromCodePoint(y)
+		} else {
+			return String.fromCodePoint(y - 26)
+		}
+	}).join("")
+}
+function prettyTimeFormat(seconds) {
+	if (seconds < 60) {
+		return Math.floor(seconds).toString()
+	}
+	if (seconds < 3600) {
+		let sec = ("0" + (seconds % 60)).slice(-2)
+		let min = Math.floor(seconds / 60)
+		return `${min}:${sec}`
+	}
+	if (seconds >= 3600) {
+		let sec = ("0" + (seconds % 60)).slice(-2)
+		let hr = Math.floor(seconds / 3600)
+		let min = ("0" + Math.floor((seconds - (3600 * hr)) / 60)).slice(-2)
+		return `${hr}:${min}:${sec}`
+	}
+}
+
 // ...
 
 /**
@@ -423,4 +494,41 @@ test("largestArrangement()", t => {
 	t.is(largestArrangement([3487, 103559, 243]), 3487243103559)
 	t.is(largestArrangement([7, 78, 79, 72, 709, 7, 94]), 9479787772709)
 })
+test("moveTen()", t => {
+	t.is(moveTen("testcase"), "docdmkco");
+	t.is(moveTen("codewars"), "mynogkbc");
+	t.is(moveTen("exampletesthere"), "ohkwzvodocdrobo");
+});
+test("Pretty Time Formatter", function () {
+	t.is("should work for 0", function () {
+		Test.assertEquals(prettyTimeFormat(0), "0", "Should return \"0\"");
+	});
+	t.is("should work for floats and should floor them", function () {
+		Test.assertEquals(prettyTimeFormat(1.8342), "1", "Should return \"1\"");
+	});
+	t.is("should work for seconds under 60", function () {
+		Test.assertEquals(prettyTimeFormat(50), "50", "Should return \"50\"");
+	});
+	t.is("should work for seconds under 10", function () {
+		Test.assertEquals(prettyTimeFormat(9), "9", "Should return \"9\"");
+	});
+	t.is("should work for float values", function () {
+		Test.assertEquals(prettyTimeFormat(9.8), "9", "Should return \"9\"");
+	});
+	t.is("should work for single-digit minutes", function () {
+		Test.assertEquals(prettyTimeFormat(90), "1:30", "Should return \"1:30\"");
+	});
+	t.is("should work for double-digit minutes", function () {
+		Test.assertEquals(prettyTimeFormat(1989), "33:09", "Should return \"33:09\"");
+	});
+	t.is("should work for single-digit hours", function () {
+		Test.assertEquals(prettyTimeFormat(14989), "4:09:49", "Should return \"4:09:49\"");
+	});
+	t.is("should work for double-digit hours", function () {
+		Test.assertEquals(prettyTimeFormat(84989), "23:36:29", "Should return \"23:36:29\"");
+	});
+	t.is("should work for hours greater than 24 and digits greater than 2", function () {
+		Test.assertEquals(prettyTimeFormat(5114989), "1420:49:49", "Should return \"1420:49:49\"");
+	});
+});
 /* eslint-enable */
