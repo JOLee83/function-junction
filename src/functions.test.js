@@ -378,157 +378,175 @@ function prettyTimeFormat(seconds) {
 		return `${min}:${sec}`
 	}
 	if (seconds >= 3600) {
-		let sec = ("0" + (seconds % 60)).slice(-2)
 		let hr = Math.floor(seconds / 3600)
 		let min = ("0" + Math.floor((seconds - (3600 * hr)) / 60)).slice(-2)
+		let sec = ("0" + Math.floor(seconds - (hr * 3600) - (min * 60))).slice(-2)
+
 		return `${hr}:${min}:${sec}`
 	}
-}
+	function prettyTimeFormat(seconds) {
+		if (seconds < 60) {
+			return Math.floor(seconds).toString()
+		}
+		if (seconds < 3600) {
+			let min = Math.floor(seconds / 60)
+			let sec = ("0" + Math.floor(seconds - (min * 60))).slice(-2)
 
-// ...
+			return `${min}:${sec}`
+		}
+		if (seconds >= 3600) {
+			let hr = Math.floor(seconds / 3600)
+			let min = ("0" + Math.floor((seconds - (3600 * hr)) / 60)).slice(-2)
+			let sec = ("0" + Math.floor(seconds - (hr * 3600) - (min * 60))).slice(-2)
 
-/**
- * NOTE: Don't modify anything below this line...
- */
+			return `${hr}:${min}:${sec}`
+		}
+	}
 
-/* eslint-disable no-undef */
+	// ...
 
-import test from 'ava'
+	/**
+	 * NOTE: Don't modify anything below this line...
+	 */
 
-test('max()', t => {
-	t.is(max(1, 3), 3)
-	t.is(max(0, 3), 3)
-	t.is(max(10, 3), 10)
-	t.is(max(-1, -3), -1)
-	t.is(max('aaa', 0), 0)
-	t.true(isNaN(max('aaa', 'bbb')))
-})
+	/* eslint-disable no-undef */
 
-test('maxOfThree()', t => {
-	t.is(maxOfThree(1, 3, 2), 3)
-	t.is(maxOfThree(0, 3, -1), 3)
-	t.is(maxOfThree(10, 3, 50), 50)
-	t.is(maxOfThree(-1, -3, -10), -1)
-	t.is(maxOfThree('aaa', 0, 1), 1)
-	t.true(isNaN(maxOfThree('aaa', 'bbb', 'ccc')))
-})
+	import test from 'ava'
 
-test('sum()', t => {
-	t.is(sum(8, 11), 19)
-	t.is(sum(4, 100), 104)
-})
+	test('max()', t => {
+		t.is(max(1, 3), 3)
+		t.is(max(0, 3), 3)
+		t.is(max(10, 3), 10)
+		t.is(max(-1, -3), -1)
+		t.is(max('aaa', 0), 0)
+		t.true(isNaN(max('aaa', 'bbb')))
+	})
 
-test('sumOfArray()', t => {
-	t.is(sumOfArray([1, 2]), 3)
-	t.is(sumOfArray([1, 2, 3]), 6)
-	t.is(sumOfArray([10, 9, 8]), 27)
-	t.is(sumOfArray([]), 0)
-})
+	test('maxOfThree()', t => {
+		t.is(maxOfThree(1, 3, 2), 3)
+		t.is(maxOfThree(0, 3, -1), 3)
+		t.is(maxOfThree(10, 3, 50), 50)
+		t.is(maxOfThree(-1, -3, -10), -1)
+		t.is(maxOfThree('aaa', 0, 1), 1)
+		t.true(isNaN(maxOfThree('aaa', 'bbb', 'ccc')))
+	})
 
-test('isVowel()', t => {
-	t.is(isVowel(0), false)
-	t.is(isVowel('B'), false)
-	t.is(isVowel('b'), false)
-	t.is(isVowel('a'), true)
-	t.is(isVowel('E'), true)
-})
+	test('sum()', t => {
+		t.is(sum(8, 11), 19)
+		t.is(sum(4, 100), 104)
+	})
 
-test('rovarspraket()', t => {
-	t.is(rovarspraket('a'), 'a')
-	t.is(rovarspraket('b'), 'bob')
-	t.is(rovarspraket('cat'), 'cocatot')
-	t.is(rovarspraket('javascript'), 'jojavovasoscocroripoptot')
-	t.is(rovarspraket(0), '0')
-})
+	test('sumOfArray()', t => {
+		t.is(sumOfArray([1, 2]), 3)
+		t.is(sumOfArray([1, 2, 3]), 6)
+		t.is(sumOfArray([10, 9, 8]), 27)
+		t.is(sumOfArray([]), 0)
+	})
 
-test('reverse()', t => {
-	t.is(reverse('books'), 'skoob')
-	t.is(reverse("we don't want no trouble"), "elbuort on tnaw t'nod ew")
-})
+	test('isVowel()', t => {
+		t.is(isVowel(0), false)
+		t.is(isVowel('B'), false)
+		t.is(isVowel('b'), false)
+		t.is(isVowel('a'), true)
+		t.is(isVowel('E'), true)
+	})
 
-test('findLongestWord()', t => {
-	t.is(findLongestWord('book dogs'), 'book')
-	t.is(findLongestWord('life the universe and everything'), 'everything')
-})
-// from Code Wars
-test('remove()', t => {
-	t.is(remove('Hi!'), 'Hi!')
-	t.is(remove('Hi!!!'), 'Hi!')
-	t.is(remove('!Hi'), 'Hi!')
-	t.is(remove('!Hi!'), 'Hi!')
-	t.is(remove('Hi! Hi!'), 'Hi Hi!')
-	t.is(remove('Hi'), 'Hi!')
-})
+	test('rovarspraket()', t => {
+		t.is(rovarspraket('a'), 'a')
+		t.is(rovarspraket('b'), 'bob')
+		t.is(rovarspraket('cat'), 'cocatot')
+		t.is(rovarspraket('javascript'), 'jojavovasoscocroripoptot')
+		t.is(rovarspraket(0), '0')
+	})
 
-test('alphabetWar()', t => {
-	t.is(alphabetWar("z"), "Right side wins!")
-	t.is(alphabetWar("zdqmwpbs"), "Let's fight again!")
-	t.is(alphabetWar("zzzzs"), "Right side wins!")
-	t.is(alphabetWar("wwwwww"), "Left side wins!")
-})
-test('findOutlier()', t => {
-	t.is(findOutlier([0, 1, 2]), 1)
-	t.is(findOutlier([1, 2, 3]), 2)
-	t.is(findOutlier([2, 6, 8, 10, 3]), 3)
-	t.is(findOutlier([0, 0, 3, 0, 0]), 3)
-	t.is(findOutlier([1, 1, 0, 1, 1]), 0)
-})
+	test('reverse()', t => {
+		t.is(reverse('books'), 'skoob')
+		t.is(reverse("we don't want no trouble"), "elbuort on tnaw t'nod ew")
+	})
 
-test('longest()', t => {
-	t.is(longest("aretheyhere", "yestheyarehere"), "aehrsty")
-	t.is(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
-	t.is(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
-})
+	test('findLongestWord()', t => {
+		t.is(findLongestWord('book dogs'), 'book')
+		t.is(findLongestWord('life the universe and everything'), 'everything')
+	})
+	// from Code Wars
+	test('remove()', t => {
+		t.is(remove('Hi!'), 'Hi!')
+		t.is(remove('Hi!!!'), 'Hi!')
+		t.is(remove('!Hi'), 'Hi!')
+		t.is(remove('!Hi!'), 'Hi!')
+		t.is(remove('Hi! Hi!'), 'Hi Hi!')
+		t.is(remove('Hi'), 'Hi!')
+	})
 
-test("smallEnough()", t => {
-	t.is(smallEnough([66, 101], 200), true);
-	t.is(smallEnough([78, 117, 110, 99, 104, 117, 107, 115], 100), false);
-	t.is(smallEnough([101, 45, 75, 105, 99, 107], 107), true);
-	t.is(smallEnough([80, 117, 115, 104, 45, 85, 112, 115], 120), true);
-})
+	test('alphabetWar()', t => {
+		t.is(alphabetWar("z"), "Right side wins!")
+		t.is(alphabetWar("zdqmwpbs"), "Let's fight again!")
+		t.is(alphabetWar("zzzzs"), "Right side wins!")
+		t.is(alphabetWar("wwwwww"), "Left side wins!")
+	})
+	test('findOutlier()', t => {
+		t.is(findOutlier([0, 1, 2]), 1)
+		t.is(findOutlier([1, 2, 3]), 2)
+		t.is(findOutlier([2, 6, 8, 10, 3]), 3)
+		t.is(findOutlier([0, 0, 3, 0, 0]), 3)
+		t.is(findOutlier([1, 1, 0, 1, 1]), 0)
+	})
 
-test("largestArrangement()", t => {
-	t.is(largestArrangement([8, 6, 590, 70]), 8706590)
-	t.is(largestArrangement([6, 73, 79, 356, 7]), 797736356)
-	t.is(largestArrangement([64, 29, 5, 9, 982, 3]), 9982645329)
-	t.is(largestArrangement([3487, 103559, 243]), 3487243103559)
-	t.is(largestArrangement([7, 78, 79, 72, 709, 7, 94]), 9479787772709)
-})
-test("moveTen()", t => {
-	t.is(moveTen("testcase"), "docdmkco");
-	t.is(moveTen("codewars"), "mynogkbc");
-	t.is(moveTen("exampletesthere"), "ohkwzvodocdrobo");
-});
-test("Pretty Time Formatter", function () {
-	t.is("should work for 0", function () {
-		Test.assertEquals(prettyTimeFormat(0), "0", "Should return \"0\"");
+	test('longest()', t => {
+		t.is(longest("aretheyhere", "yestheyarehere"), "aehrsty")
+		t.is(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
+		t.is(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
+	})
+
+	test("smallEnough()", t => {
+		t.is(smallEnough([66, 101], 200), true);
+		t.is(smallEnough([78, 117, 110, 99, 104, 117, 107, 115], 100), false);
+		t.is(smallEnough([101, 45, 75, 105, 99, 107], 107), true);
+		t.is(smallEnough([80, 117, 115, 104, 45, 85, 112, 115], 120), true);
+	})
+
+	test("largestArrangement()", t => {
+		t.is(largestArrangement([8, 6, 590, 70]), 8706590)
+		t.is(largestArrangement([6, 73, 79, 356, 7]), 797736356)
+		t.is(largestArrangement([64, 29, 5, 9, 982, 3]), 9982645329)
+		t.is(largestArrangement([3487, 103559, 243]), 3487243103559)
+		t.is(largestArrangement([7, 78, 79, 72, 709, 7, 94]), 9479787772709)
+	})
+	test("moveTen()", t => {
+		t.is(moveTen("testcase"), "docdmkco");
+		t.is(moveTen("codewars"), "mynogkbc");
+		t.is(moveTen("exampletesthere"), "ohkwzvodocdrobo");
 	});
-	t.is("should work for floats and should floor them", function () {
-		Test.assertEquals(prettyTimeFormat(1.8342), "1", "Should return \"1\"");
+	test("Pretty Time Formatter", function () {
+		t.is("should work for 0", function () {
+			Test.assertEquals(prettyTimeFormat(0), "0", "Should return \"0\"");
+		});
+		t.is("should work for floats and should floor them", function () {
+			Test.assertEquals(prettyTimeFormat(1.8342), "1", "Should return \"1\"");
+		});
+		t.is("should work for seconds under 60", function () {
+			Test.assertEquals(prettyTimeFormat(50), "50", "Should return \"50\"");
+		});
+		t.is("should work for seconds under 10", function () {
+			Test.assertEquals(prettyTimeFormat(9), "9", "Should return \"9\"");
+		});
+		t.is("should work for float values", function () {
+			Test.assertEquals(prettyTimeFormat(9.8), "9", "Should return \"9\"");
+		});
+		t.is("should work for single-digit minutes", function () {
+			Test.assertEquals(prettyTimeFormat(90), "1:30", "Should return \"1:30\"");
+		});
+		t.is("should work for double-digit minutes", function () {
+			Test.assertEquals(prettyTimeFormat(1989), "33:09", "Should return \"33:09\"");
+		});
+		t.is("should work for single-digit hours", function () {
+			Test.assertEquals(prettyTimeFormat(14989), "4:09:49", "Should return \"4:09:49\"");
+		});
+		t.is("should work for double-digit hours", function () {
+			Test.assertEquals(prettyTimeFormat(84989), "23:36:29", "Should return \"23:36:29\"");
+		});
+		t.is("should work for hours greater than 24 and digits greater than 2", function () {
+			Test.assertEquals(prettyTimeFormat(5114989), "1420:49:49", "Should return \"1420:49:49\"");
+		});
 	});
-	t.is("should work for seconds under 60", function () {
-		Test.assertEquals(prettyTimeFormat(50), "50", "Should return \"50\"");
-	});
-	t.is("should work for seconds under 10", function () {
-		Test.assertEquals(prettyTimeFormat(9), "9", "Should return \"9\"");
-	});
-	t.is("should work for float values", function () {
-		Test.assertEquals(prettyTimeFormat(9.8), "9", "Should return \"9\"");
-	});
-	t.is("should work for single-digit minutes", function () {
-		Test.assertEquals(prettyTimeFormat(90), "1:30", "Should return \"1:30\"");
-	});
-	t.is("should work for double-digit minutes", function () {
-		Test.assertEquals(prettyTimeFormat(1989), "33:09", "Should return \"33:09\"");
-	});
-	t.is("should work for single-digit hours", function () {
-		Test.assertEquals(prettyTimeFormat(14989), "4:09:49", "Should return \"4:09:49\"");
-	});
-	t.is("should work for double-digit hours", function () {
-		Test.assertEquals(prettyTimeFormat(84989), "23:36:29", "Should return \"23:36:29\"");
-	});
-	t.is("should work for hours greater than 24 and digits greater than 2", function () {
-		Test.assertEquals(prettyTimeFormat(5114989), "1420:49:49", "Should return \"1420:49:49\"");
-	});
-});
 /* eslint-enable */
