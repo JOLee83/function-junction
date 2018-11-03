@@ -403,6 +403,51 @@ function prettyTimeFormat(seconds) {
 		}
 	}
 
+	function XO(str) {
+		let xc = 0
+		let oc = 0
+		str.split("").map(a => {
+			if (a === "x" || a === "X") {
+				xc++
+			}
+			if (a === "o" || a === "O") {
+				oc++
+			}
+		})
+		if (xc === oc) {
+			return true
+		} else {
+			return false
+		}
+	}
+
+	function abbrevName(name) {
+		let names = name.split(' ')
+		let FI = names[0].split('')
+		let LI = names[1].split('')
+		return `${FI[0].toUpperCase()}.${LI[0].toUpperCase()}`
+	}
+	function findShort(s) {
+		let str = s.split(' ')
+		let shortest = 20
+		let word = null
+		for (let i = 0; i <= str.length - 1; i++) {
+			if (shortest > str[i].length) {
+				shortest = str[i].length
+			}
+		}
+		return shortest
+	}
+	function trouble(x, t) {
+		for (let i = 0; i < x.length; i++) {
+			let k = i + 1
+			if (x[i] + x[k] === t) {
+				x.splice(k, 1)
+				i--
+			}
+		}
+		return x
+	}
 	// ...
 
 	/**
@@ -517,7 +562,7 @@ function prettyTimeFormat(seconds) {
 		t.is(moveTen("codewars"), "mynogkbc");
 		t.is(moveTen("exampletesthere"), "ohkwzvodocdrobo");
 	});
-	test("Pretty Time Formatter", function () {
+	test("Pretty Time Formatter()", t => {
 		t.is("should work for 0", function () {
 			Test.assertEquals(prettyTimeFormat(0), "0", "Should return \"0\"");
 		});
@@ -549,4 +594,29 @@ function prettyTimeFormat(seconds) {
 			Test.assertEquals(prettyTimeFormat(5114989), "1420:49:49", "Should return \"1420:49:49\"");
 		});
 	});
+	test("XO()", t => {
+		t.is('xo'), true);
+	t.is("xxOo"), true);
+	t.is("xxxm"), false);
+	t.is("Oo"), false);
+	t.is("ooom"), false);
+});
+
+test("abbrevName()", t => {
+	t.is(abbrevName("Sam Harris"), "S.H");
+	t.is(abbrevName("Patrick Feenan"), "P.F");
+	t.is(abbrevName("Evan Cole"), "E.C");
+	t.is(abbrevName("P Favuzzi"), "P.F");
+	t.is(abbrevName("David Mendieta"), "D.M");
+})
+test("findShort()", t => {
+	t.is(findShort("bitcoin take over the world maybe who knows perhaps"), 3);
+	t.is(findShort("turns out random test cases are easier than writing out basic ones"), 3);
+});
+
+test("trouble()", t => {
+	t.is(trouble([1, 3, 5, 6, 7, 4, 3], 7), [1, 3, 5, 6, 7, 4]);
+	t.is(trouble([4, 1, 1, 1, 4], 2), [4, 1, 4]);
+	t.is(trouble([2, 2, 2, 2, 2, 2], 4), [2]);
+});
 /* eslint-enable */
