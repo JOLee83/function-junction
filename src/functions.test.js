@@ -448,6 +448,42 @@ function prettyTimeFormat(seconds) {
 		}
 		return x
 	}
+	function check(a, x) {
+		for (let i = 0; i < a.length; i++) {
+			if (a[i] === x) {
+				return true
+			}
+		}
+		return false
+	};
+	function solution(str) {
+		var result = 0
+		// the result is now a number, not a string
+		var decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+		var roman = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+		for (var i = 0; i <= decimal.length; i++) {
+			while (str.indexOf(roman[i]) === 0) {
+				//checking for the first characters in the string
+				result += decimal[i];
+				//adding the decimal value to our result counter
+				str = str.replace(roman[i], '')
+				//remove the matched Roman letter from the beginning
+			}
+		}
+		return result
+	}
+
+	function distinct(a) {
+		let b = 0
+		for (let i = 0; i < a.length; i++) {
+			if (a[i] === b) {
+				a.splice(i, 1)
+				i--
+			}
+			b = a[i]
+		}
+		return a
+	}
 	// ...
 
 	/**
@@ -619,4 +655,21 @@ test("trouble()", t => {
 	t.is(trouble([4, 1, 1, 1, 4], 2), [4, 1, 4]);
 	t.is(trouble([2, 2, 2, 2, 2, 2], 4), [2]);
 });
+test("check()", t => {
+	t.is(check([66, 101], 66), true);
+	t.is(check([80, 117, 115, 104, 45, 85, 112, 115], 45), true);
+	t.is(check(['t', 'e', 's', 't'], 'e'), true);
+	t.is(check(['what', 'a', 'great', 'kata'], 'kat'), false);
+})
+test("solution()", t => {
+	t.is(solution("XII"), 12);
+	t.is(solution("IX"), 9);
+	t.is(solution("VM"), 995);
+	t.is(solution("MMDLIX"), 2559);
+})
+test("distinct()", t => {
+	t.is(distinct([1]), [1]);
+	t.is(distinct([1, 2]), [1, 2]);
+	t.is(distinct([1, 1, 2]), [1, 2]);
+})
 /* eslint-enable */
