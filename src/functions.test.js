@@ -484,6 +484,27 @@ function prettyTimeFormat(seconds) {
 		}
 		return a
 	}
+	function maxNumber(n) {
+		return parseInt(n.toString().split("").sort().reverse().join(""))
+	}
+	function makePassword(phrase) {
+		return phrase.split(" ").map(p => {
+			if (p[0] == "i" || p[0] == "I") {
+				return "1"
+			}
+			if (p[0] == "s" || p[0] == "S") {
+				return "5"
+			}
+			if (p[0] == "O" || p[0] == "o") {
+				return "0"
+			} else {
+				return p[0]
+			}
+		}).join("")
+	}
+	const binaryArrayToNumber = arr => {
+		return parseInt(arr.join(''), 2)
+	};
 	// ...
 
 	/**
@@ -672,4 +693,21 @@ test("distinct()", t => {
 	t.is(distinct([1, 2]), [1, 2]);
 	t.is(distinct([1, 1, 2]), [1, 2]);
 })
+test("maxNumber()", t => {
+	t.is(maxNumber(213), 321);
+	t.is(maxNumber(7389), 9873);
+	t.is(maxNumber(63792), 97632);
+	t.is(maxNumber(566797), 977665);
+	t.is(maxNumber(1000000), 1000000);
+});
+test("makePassword()", t => {
+	t.is(makePassword("Give me liberty or give me death"), "Gml0gmd", "Wrong output for 'Give me liberty or give me death'");
+	t.is(makePassword("Keep Calm and Carry On"), "KCaC0", "Wrong output for 'Keep Calm and Carry On'");
+});
+test("binaryArrayToNumber()", t => {
+	t.is(binaryArrayToNumber([0, 0, 0, 1]), 1);
+	t.is(binaryArrayToNumber([0, 0, 1, 0]), 2);
+	t.is(binaryArrayToNumber([1, 1, 1, 1]), 15);
+	t.is(binaryArrayToNumber([0, 1, 1, 0]), 6);
+});
 /* eslint-enable */
