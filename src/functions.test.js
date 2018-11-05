@@ -505,6 +505,18 @@ function prettyTimeFormat(seconds) {
 	const binaryArrayToNumber = arr => {
 		return parseInt(arr.join(''), 2)
 	};
+	function oddOrEven(array) {
+		return array.length === 0 ? 'even' :
+			(array.reduce((accumulator, currentValue) =>
+				accumulator + currentValue)) % 2 === 0 ? 'even' : 'odd'
+	}
+	function DNAStrand(dna) {
+		return dna.split('').map(x => {
+			return x === 'A' ? 'T' : x === 'T'
+				? 'A' : x === 'G' ? 'C' : x === 'C'
+					? 'G' : null
+		}).join('')
+	}
 	// ...
 
 	/**
@@ -704,10 +716,34 @@ test("makePassword()", t => {
 	t.is(makePassword("Give me liberty or give me death"), "Gml0gmd", "Wrong output for 'Give me liberty or give me death'");
 	t.is(makePassword("Keep Calm and Carry On"), "KCaC0", "Wrong output for 'Keep Calm and Carry On'");
 });
+
 test("binaryArrayToNumber()", t => {
 	t.is(binaryArrayToNumber([0, 0, 0, 1]), 1);
 	t.is(binaryArrayToNumber([0, 0, 1, 0]), 2);
 	t.is(binaryArrayToNumber([1, 1, 1, 1]), 15);
 	t.is(binaryArrayToNumber([0, 1, 1, 0]), 6);
 });
+
+test('Edge tests', t => {
+	t.is(oddOrEven([0]), 'even')
+	t.is(oddOrEven([1]), 'odd')
+	t.is(oddOrEven([]), 'even')
+	t.is(oddOrEven([0, 1, 5]), 'even')
+	t.is(oddOrEven([0, 1, 3]), 'even')
+	t.is(oddOrEven([1023, 1, 2]), 'even')
+	t.is(oddOrEven([0, -1, -5]), 'even')
+	t.is(oddOrEven([0, -1, -3]), 'even')
+	t.is(oddOrEven([-1023, 1, -2]), 'even')
+	t.is(oddOrEven([0, 1, 2]), 'odd')
+	t.is(oddOrEven([0, 1, 4]), 'odd')
+	t.is(oddOrEven([1023, 1, 3]), 'odd')
+	t.is(oddOrEven([0, -1, 2]), 'odd')
+	t.is(oddOrEven([0, 1, -4]), 'odd')
+	t.is(oddOrEven([-1023, -1, 3]), 'odd')
+});
+test("DNAStrand()" t => {
+	t.is(DNAStrand("AAAA"), "TTTT", "String AAAA is");
+	t.is(DNAStrand("ATTGC"), "TAACG", "String ATTGC is");
+	t.is(DNAStrand("GTAT"), "CATA", "String GTAT is");
+})
 /* eslint-enable */
