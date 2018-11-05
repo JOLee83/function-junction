@@ -664,86 +664,86 @@ function prettyTimeFormat(seconds) {
 		});
 	});
 	test("XO()", t => {
-		t.is('xo'), true);
-	t.is("xxOo"), true);
-	t.is("xxxm"), false);
-	t.is("Oo"), false);
-	t.is("ooom"), false);
-});
+		t.is(XO('xo'), true);
+		t.is(XO("xxOo"), true);
+		t.is(XO("xxxm"), false);
+		t.is(XO("Oo"), false);
+		t.is(XO("ooom"), false);
+	})
 
-test("abbrevName()", t => {
-	t.is(abbrevName("Sam Harris"), "S.H");
-	t.is(abbrevName("Patrick Feenan"), "P.F");
-	t.is(abbrevName("Evan Cole"), "E.C");
-	t.is(abbrevName("P Favuzzi"), "P.F");
-	t.is(abbrevName("David Mendieta"), "D.M");
-})
-test("findShort()", t => {
-	t.is(findShort("bitcoin take over the world maybe who knows perhaps"), 3);
-	t.is(findShort("turns out random test cases are easier than writing out basic ones"), 3);
-});
+	test("abbrevName()", t => {
+		t.is(abbrevName("Sam Harris"), "S.H");
+		t.is(abbrevName("Patrick Feenan"), "P.F");
+		t.is(abbrevName("Evan Cole"), "E.C");
+		t.is(abbrevName("P Favuzzi"), "P.F");
+		t.is(abbrevName("David Mendieta"), "D.M");
+	})
+	test("findShort()", t => {
+		t.is(findShort("bitcoin take over the world maybe who knows perhaps"), 3);
+		t.is(findShort("turns out random test cases are easier than writing out basic ones"), 3);
+	});
 
-test("trouble()", t => {
-	t.is(trouble([1, 3, 5, 6, 7, 4, 3], 7), [1, 3, 5, 6, 7, 4]);
-	t.is(trouble([4, 1, 1, 1, 4], 2), [4, 1, 4]);
-	t.is(trouble([2, 2, 2, 2, 2, 2], 4), [2]);
-});
-test("check()", t => {
-	t.is(check([66, 101], 66), true);
-	t.is(check([80, 117, 115, 104, 45, 85, 112, 115], 45), true);
-	t.is(check(['t', 'e', 's', 't'], 'e'), true);
-	t.is(check(['what', 'a', 'great', 'kata'], 'kat'), false);
-})
-test("solution()", t => {
-	t.is(solution("XII"), 12);
-	t.is(solution("IX"), 9);
-	t.is(solution("VM"), 995);
-	t.is(solution("MMDLIX"), 2559);
-})
-test("distinct()", t => {
-	t.is(distinct([1]), [1]);
-	t.is(distinct([1, 2]), [1, 2]);
-	t.is(distinct([1, 1, 2]), [1, 2]);
-})
-test("maxNumber()", t => {
-	t.is(maxNumber(213), 321);
-	t.is(maxNumber(7389), 9873);
-	t.is(maxNumber(63792), 97632);
-	t.is(maxNumber(566797), 977665);
-	t.is(maxNumber(1000000), 1000000);
-});
-test("makePassword()", t => {
-	t.is(makePassword("Give me liberty or give me death"), "Gml0gmd", "Wrong output for 'Give me liberty or give me death'");
-	t.is(makePassword("Keep Calm and Carry On"), "KCaC0", "Wrong output for 'Keep Calm and Carry On'");
-});
+	test("trouble()", t => {
+		t.is(trouble([1, 3, 5, 6, 7, 4, 3], 7), [1, 3, 5, 6, 7, 4]);
+		t.is(trouble([4, 1, 1, 1, 4], 2), [4, 1, 4]);
+		t.is(trouble([2, 2, 2, 2, 2, 2], 4), [2]);
+	});
+	test("check()", t => {
+		t.is(check([66, 101], 66), true);
+		t.is(check([80, 117, 115, 104, 45, 85, 112, 115], 45), true);
+		t.is(check(['t', 'e', 's', 't'], 'e'), true);
+		t.is(check(['what', 'a', 'great', 'kata'], 'kat'), false);
+	})
+	test("solution()", t => {
+		t.is(solution("XII"), 12);
+		t.is(solution("IX"), 9);
+		t.is(solution("VM"), 995);
+		t.is(solution("MMDLIX"), 2559);
+	})
+	test("distinct()", t => {
+		t.is(distinct([1]), [1]);
+		t.is(distinct([1, 2]), [1, 2]);
+		t.is(distinct([1, 1, 2]), [1, 2]);
+	})
+	test("maxNumber()", t => {
+		t.is(maxNumber(213), 321);
+		t.is(maxNumber(7389), 9873);
+		t.is(maxNumber(63792), 97632);
+		t.is(maxNumber(566797), 977665);
+		t.is(maxNumber(1000000), 1000000);
+	});
+	test("makePassword()", t => {
+		t.is(makePassword("Give me liberty or give me death"), "Gml0gmd", "Wrong output for 'Give me liberty or give me death'");
+		t.is(makePassword("Keep Calm and Carry On"), "KCaC0", "Wrong output for 'Keep Calm and Carry On'");
+	});
 
-test("binaryArrayToNumber()", t => {
-	t.is(binaryArrayToNumber([0, 0, 0, 1]), 1);
-	t.is(binaryArrayToNumber([0, 0, 1, 0]), 2);
-	t.is(binaryArrayToNumber([1, 1, 1, 1]), 15);
-	t.is(binaryArrayToNumber([0, 1, 1, 0]), 6);
-});
+	test("binaryArrayToNumber()", t => {
+		t.is(binaryArrayToNumber([0, 0, 0, 1]), 1);
+		t.is(binaryArrayToNumber([0, 0, 1, 0]), 2);
+		t.is(binaryArrayToNumber([1, 1, 1, 1]), 15);
+		t.is(binaryArrayToNumber([0, 1, 1, 0]), 6);
+	});
 
-test('Edge tests', t => {
-	t.is(oddOrEven([0]), 'even')
-	t.is(oddOrEven([1]), 'odd')
-	t.is(oddOrEven([]), 'even')
-	t.is(oddOrEven([0, 1, 5]), 'even')
-	t.is(oddOrEven([0, 1, 3]), 'even')
-	t.is(oddOrEven([1023, 1, 2]), 'even')
-	t.is(oddOrEven([0, -1, -5]), 'even')
-	t.is(oddOrEven([0, -1, -3]), 'even')
-	t.is(oddOrEven([-1023, 1, -2]), 'even')
-	t.is(oddOrEven([0, 1, 2]), 'odd')
-	t.is(oddOrEven([0, 1, 4]), 'odd')
-	t.is(oddOrEven([1023, 1, 3]), 'odd')
-	t.is(oddOrEven([0, -1, 2]), 'odd')
-	t.is(oddOrEven([0, 1, -4]), 'odd')
-	t.is(oddOrEven([-1023, -1, 3]), 'odd')
-});
-test("DNAStrand()" t => {
-	t.is(DNAStrand("AAAA"), "TTTT", "String AAAA is");
-	t.is(DNAStrand("ATTGC"), "TAACG", "String ATTGC is");
-	t.is(DNAStrand("GTAT"), "CATA", "String GTAT is");
-})
+	test('Edge tests', t => {
+		t.is(oddOrEven([0]), 'even')
+		t.is(oddOrEven([1]), 'odd')
+		t.is(oddOrEven([]), 'even')
+		t.is(oddOrEven([0, 1, 5]), 'even')
+		t.is(oddOrEven([0, 1, 3]), 'even')
+		t.is(oddOrEven([1023, 1, 2]), 'even')
+		t.is(oddOrEven([0, -1, -5]), 'even')
+		t.is(oddOrEven([0, -1, -3]), 'even')
+		t.is(oddOrEven([-1023, 1, -2]), 'even')
+		t.is(oddOrEven([0, 1, 2]), 'odd')
+		t.is(oddOrEven([0, 1, 4]), 'odd')
+		t.is(oddOrEven([1023, 1, 3]), 'odd')
+		t.is(oddOrEven([0, -1, 2]), 'odd')
+		t.is(oddOrEven([0, 1, -4]), 'odd')
+		t.is(oddOrEven([-1023, -1, 3]), 'odd')
+	});
+	test("DNAStrand()" t => {
+		t.is(DNAStrand("AAAA"), "TTTT", "String AAAA is");
+		t.is(DNAStrand("ATTGC"), "TAACG", "String ATTGC is");
+		t.is(DNAStrand("GTAT"), "CATA", "String GTAT is");
+	})
 /* eslint-enable */
