@@ -176,59 +176,8 @@ function findLongestWord(string) {
 function remove(s) {
 	return s.split('!').join('') + '!'
 }
-// C# version
-// public class Kata
-// {
-//   public static string Remove(string s)
-//   {
-//     return s.Remove("!", "") + "!";
-//     }
-// }
 
 
-
-
-// using System;
-// public class Kata
-// {
-//   public static string Remove(string s)
-//   {
-// //     s = s.Replace("!", String.Empty);
-//     var bangCounter = 0;
-//     foreach (var letter in s)
-//     {
-//       if (letter == '!')
-//       {
-//         bangCounter++;
-//       }
-//       else
-//       {
-//         bangCounter = 0;
-//       }
-//     }  
-//     return s.Replace("!", String.Empty) + new String('!', bangCounter);
-//   }
-// }
-
-// namespace Solution {
-//   using NUnit.Framework;
-//   using System;
-
-//   [TestFixture]
-//   public class SolutionTest
-//   {
-//     [Test, Description("It should work for basic tests")]
-//     public void SampleTest()
-//     {
-//       Assert.AreEqual("Hi!", Kata.Remove("Hi!"));
-//       Assert.AreEqual("Hi!!!", Kata.Remove("Hi!!!"));
-//       Assert.AreEqual("Hi", Kata.Remove("!Hi"));
-//       Assert.AreEqual("Hi!", Kata.Remove("!Hi!"));
-//       Assert.AreEqual("Hi Hi!", Kata.Remove("Hi! Hi!"));
-//       Assert.AreEqual("Hi", Kata.Remove("Hi"));
-//     }
-//   }
-// }
 
 function alphabetWar(fight) {
 	let count = 0
@@ -517,13 +466,57 @@ function prettyTimeFormat(seconds) {
 					? 'G' : null
 		}).join('')
 	}
+	function minValue(values) {
+		let y
+		return parseInt(values.sort().map(x => {
+			if (y === null) {
+				y = x
+				return x
+			}
+			if (y === x) {
+				return null
+			} else {
+				y = x
+				return x
+			}
+		}).join(''), 10)
+	}
+	function vowelBack(s) {
+		return s.split("").map(x => {
+			let y = x.charCodeAt()
+			if (y === 114 || y === 115 || 119 <= y && y <= 122) {
+				return String.fromCodePoint(y - 17)
+			}
+			if (y === 99 || y === 111) {
+				return String.fromCodePoint(y - 1)
+			}
+			if (y === 100 || y === 101) {
+				return String.fromCodePoint(97)
+			}
+			if (y === 117) {
+				return String.fromCodePoint(112)
+			}
+			if (y === 98 || 103 <= y && y <= 104 || 106 <= y && y <= 110 || 112 <= y && y <= 113) {
+				return String.fromCodePoint(y + 9)
+			}
+			if (y === 97) {
+				return String.fromCodePoint(118)
+			}
+			else {
+				return String.fromCodePoint(y)
+			}
+		}).join("")
+	}
+	function inverseSlice(items, a, b) {
+		let removeThese = items.slice(a, b)
+		removeThese.map(x => {
+			items = items.filter(y => y != x)
+		})
+		return items
+	}
 	// ...
 
-	/**
-	 * NOTE: Don't modify anything below this line...
-	 */
 
-	/* eslint-disable no-undef */
 
 	import test from 'ava'
 
@@ -631,37 +624,17 @@ function prettyTimeFormat(seconds) {
 		t.is(moveTen("codewars"), "mynogkbc");
 		t.is(moveTen("exampletesthere"), "ohkwzvodocdrobo");
 	});
-	test("Pretty Time Formatter()", t => {
-		t.is("should work for 0", function () {
-			Test.assertEquals(prettyTimeFormat(0), "0", "Should return \"0\"");
-		});
-		t.is("should work for floats and should floor them", function () {
-			Test.assertEquals(prettyTimeFormat(1.8342), "1", "Should return \"1\"");
-		});
-		t.is("should work for seconds under 60", function () {
-			Test.assertEquals(prettyTimeFormat(50), "50", "Should return \"50\"");
-		});
-		t.is("should work for seconds under 10", function () {
-			Test.assertEquals(prettyTimeFormat(9), "9", "Should return \"9\"");
-		});
-		t.is("should work for float values", function () {
-			Test.assertEquals(prettyTimeFormat(9.8), "9", "Should return \"9\"");
-		});
-		t.is("should work for single-digit minutes", function () {
-			Test.assertEquals(prettyTimeFormat(90), "1:30", "Should return \"1:30\"");
-		});
-		t.is("should work for double-digit minutes", function () {
-			Test.assertEquals(prettyTimeFormat(1989), "33:09", "Should return \"33:09\"");
-		});
-		t.is("should work for single-digit hours", function () {
-			Test.assertEquals(prettyTimeFormat(14989), "4:09:49", "Should return \"4:09:49\"");
-		});
-		t.is("should work for double-digit hours", function () {
-			Test.assertEquals(prettyTimeFormat(84989), "23:36:29", "Should return \"23:36:29\"");
-		});
-		t.is("should work for hours greater than 24 and digits greater than 2", function () {
-			Test.assertEquals(prettyTimeFormat(5114989), "1420:49:49", "Should return \"1420:49:49\"");
-		});
+	test("prettyTimeFormat()", t => {
+		t.is((0), "0");
+		t.is(prettyTimeFormat(1.8342), "1");
+		t.is(prettyTimeFormat(50), "50");
+		t.is(prettyTimeFormat(9), "9");
+		t.is(prettyTimeFormat(9.8), "9");
+		t.is(prettyTimeFormat(90), "1:30");
+		t.is(prettyTimeFormat(1989), "33:09");
+		t.is(prettyTimeFormat(14989), "4:09:49");
+		t.is(prettyTimeFormat(84989), "23:36:29");
+		t.is(prettyTimeFormat(5114989), "1420:49:49");
 	});
 	test("XO()", t => {
 		t.is(XO('xo'), true);
@@ -682,7 +655,6 @@ function prettyTimeFormat(seconds) {
 		t.is(findShort("bitcoin take over the world maybe who knows perhaps"), 3);
 		t.is(findShort("turns out random test cases are easier than writing out basic ones"), 3);
 	});
-
 	test("trouble()", t => {
 		t.is(trouble([1, 3, 5, 6, 7, 4, 3], 7), [1, 3, 5, 6, 7, 4]);
 		t.is(trouble([4, 1, 1, 1, 4], 2), [4, 1, 4]);
@@ -716,14 +688,12 @@ function prettyTimeFormat(seconds) {
 		t.is(makePassword("Give me liberty or give me death"), "Gml0gmd", "Wrong output for 'Give me liberty or give me death'");
 		t.is(makePassword("Keep Calm and Carry On"), "KCaC0", "Wrong output for 'Keep Calm and Carry On'");
 	});
-
 	test("binaryArrayToNumber()", t => {
 		t.is(binaryArrayToNumber([0, 0, 0, 1]), 1);
 		t.is(binaryArrayToNumber([0, 0, 1, 0]), 2);
 		t.is(binaryArrayToNumber([1, 1, 1, 1]), 15);
 		t.is(binaryArrayToNumber([0, 1, 1, 0]), 6);
 	});
-
 	test('Edge tests', t => {
 		t.is(oddOrEven([0]), 'even')
 		t.is(oddOrEven([1]), 'odd')
@@ -746,4 +716,26 @@ function prettyTimeFormat(seconds) {
 		t.is(DNAStrand("ATTGC"), "TAACG", "String ATTGC is");
 		t.is(DNAStrand("GTAT"), "CATA", "String GTAT is");
 	})
-/* eslint-enable */
+
+	test("minValue", t => {
+		t.is(minValue([1, 3, 1]), 13);
+		t.is(minValue([4, 7, 5, 7]), 457);
+		t.is(minValue([4, 8, 1, 4]), 148);
+		t.is(minValue([5, 7, 9, 5, 7]), 579);
+		t.is(minValue([6, 7, 8, 7, 6, 6]), 678);
+		t.is(minValue([5, 6, 9, 9, 7, 6, 4]), 45679);
+		t.is(minValue([1, 9, 1, 3, 7, 4, 6, 6, 7]), 134679);
+		t.is(minValue([3, 6, 5, 5, 9, 8, 7, 6, 3, 5, 9]), 356789);
+		t.is(minValue([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]), 1);
+		t.is(minValue([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 0);
+	});
+	test("vowelBack()", t => {
+		t.is(vowelBack("testcase"), "tabtbvba");
+		t.is(vowelBack("codewars"), "bnaafvab");
+		t.is(vowelBack("exampletesthere"), "agvvyuatabtqaaa");
+	});
+	test("inverseSlice()", t => {
+		t.is(inverseSlice([12, 14, 63, 72, 55, 24], 2, 4), [12, 14, 55, 24]);
+		t.is(inverseSlice([12, 14, 63, 72, 55, 24], 0, 3), [72, 55, 24]);
+		t.is(inverseSlice(['Intuition', 'is', 'a', 'poor', 'guide', 'when', 'facing', 'probabilistic', 'evidence'], 5, 13), ['Intuition', 'is', 'a', 'poor', 'guide']);
+	});
