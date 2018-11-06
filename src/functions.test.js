@@ -508,11 +508,9 @@ function prettyTimeFormat(seconds) {
 		}).join("")
 	}
 	function inverseSlice(items, a, b) {
-		let removeThese = items.slice(a, b)
-		removeThese.map(x => {
-			items = items.filter(y => y != x)
-		})
-		return items
+		let end = items.splice(b, items.length - 1)
+		let start = items.splice(0, a)
+		return start.concat(end)
 	}
 	// ...
 
