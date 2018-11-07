@@ -171,6 +171,11 @@ function findLongestWord(string) {
 	}
 	return word
 }
+// from  Code Wars
+
+function remove(s) {
+	return s.split('!').join('') + '!'
+}
 
 // ...
 
@@ -236,6 +241,15 @@ test('reverse()', t => {
 test('findLongestWord()', t => {
 	t.is(findLongestWord('book dogs'), 'book')
 	t.is(findLongestWord('life the universe and everything'), 'everything')
+})
+// from Code Wars
+test('remove()', t => {
+	t.is(remove('Hi!'), 'Hi!')
+	t.is(remove('Hi!!!'), 'Hi!')
+	t.is(remove('!Hi'), 'Hi!')
+	t.is(remove('!Hi!'), 'Hi!')
+	t.is(remove('Hi! Hi!'), 'Hi Hi!')
+	t.is(remove('Hi'), 'Hi!')
 })
 
 /* eslint-enable */
