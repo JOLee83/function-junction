@@ -540,6 +540,17 @@ function prettyTimeFormat(seconds) {
 				return
 			}
 		})
+		function calculateTip(amount, rating) {
+			return rating.toLowerCase() === 'terrible' ? 0 :
+				rating.toLowerCase() === 'poor' ? Math.ceil(amount * .05) :
+					rating.toLowerCase() === 'good' ? Math.ceil(amount * .1) :
+						rating.toLowerCase() === 'great' ? Math.ceil(amount * .15) :
+							rating.toLowerCase() === 'excellent' ? Math.ceil(amount * .2) :
+								"Rating not recognised"
+		}
+		function calculate_total(subtotal, tax, tip) {
+			return Math.round((subtotal + (subtotal * tax / 100) + (subtotal * tip / 100)) * 100) / 100
+		}
 		// ...
 
 
@@ -774,4 +785,15 @@ function prettyTimeFormat(seconds) {
 			t.is(alphabetWar("sz**z**zs"), "Left side wins!");
 			t.is(alphabetWar("z*z*z*zs"), "Left side wins!");
 			t.is(alphabetWar("*wwwwww*z*"), "Left side wins!");
+		});
+		test("calculateTip()", t => {
+			t.is(calculateTip(20, "Excellent"), 4);
+			t.is(calculateTip(26.95, "good"), 3);
+		});
+		test("calculate_total()", t => {
+			t.is(calculate_total(5, 5, 10), 5.75);
+			t.is(calculate_total(36.97, 7, 15), 45.10);
+			t.is(calculate_total(0.00, 6, 18), 0.00);
+			t.is(calculate_total(80.94, 0, 20), 97.13);
+			t.is(calculate_total(54.96, 8, 0), 59.36);
 		});
