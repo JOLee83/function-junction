@@ -512,228 +512,267 @@ function prettyTimeFormat(seconds) {
 		let start = items.splice(0, a)
 		return start.concat(end)
 	}
-	// ...
+	function alphabetWar(fight) {
+		let left = "sbpw"
+		let right = "zdqm"
+		let count = 0
+		let prevCount = 0
+		let skip = false
+		fight.split("").map(x => {
+			if (x === "*") {
+				count = count - prevCount
+				skip = true
+				prevCount = 0
+			}
+			else if (skip === true) {
+				skip = false
+			}
+			else if (left.includes(x)) {
+				count = count + (left.indexOf(x) + 1)
+				prevCount = (left.indexOf(x) + 1)
+			}
+			else if (right.includes(x)) {
+				count = count - (right.indexOf(x) + 1)
+				prevCount = -(right.indexOf(x) + 1)
+			}
+			else {
+				prevCount = 0
+				return
+			}
+		})
+		// ...
 
 
 
-	import test from 'ava'
+		import test from 'ava'
 
-	test('max()', t => {
-		t.is(max(1, 3), 3)
-		t.is(max(0, 3), 3)
-		t.is(max(10, 3), 10)
-		t.is(max(-1, -3), -1)
-		t.is(max('aaa', 0), 0)
-		t.true(isNaN(max('aaa', 'bbb')))
-	})
+		test('max()', t => {
+			t.is(max(1, 3), 3)
+			t.is(max(0, 3), 3)
+			t.is(max(10, 3), 10)
+			t.is(max(-1, -3), -1)
+			t.is(max('aaa', 0), 0)
+			t.true(isNaN(max('aaa', 'bbb')))
+		})
 
-	test('maxOfThree()', t => {
-		t.is(maxOfThree(1, 3, 2), 3)
-		t.is(maxOfThree(0, 3, -1), 3)
-		t.is(maxOfThree(10, 3, 50), 50)
-		t.is(maxOfThree(-1, -3, -10), -1)
-		t.is(maxOfThree('aaa', 0, 1), 1)
-		t.true(isNaN(maxOfThree('aaa', 'bbb', 'ccc')))
-	})
+		test('maxOfThree()', t => {
+			t.is(maxOfThree(1, 3, 2), 3)
+			t.is(maxOfThree(0, 3, -1), 3)
+			t.is(maxOfThree(10, 3, 50), 50)
+			t.is(maxOfThree(-1, -3, -10), -1)
+			t.is(maxOfThree('aaa', 0, 1), 1)
+			t.true(isNaN(maxOfThree('aaa', 'bbb', 'ccc')))
+		})
 
-	test('sum()', t => {
-		t.is(sum(8, 11), 19)
-		t.is(sum(4, 100), 104)
-	})
+		test('sum()', t => {
+			t.is(sum(8, 11), 19)
+			t.is(sum(4, 100), 104)
+		})
 
-	test('sumOfArray()', t => {
-		t.is(sumOfArray([1, 2]), 3)
-		t.is(sumOfArray([1, 2, 3]), 6)
-		t.is(sumOfArray([10, 9, 8]), 27)
-		t.is(sumOfArray([]), 0)
-	})
+		test('sumOfArray()', t => {
+			t.is(sumOfArray([1, 2]), 3)
+			t.is(sumOfArray([1, 2, 3]), 6)
+			t.is(sumOfArray([10, 9, 8]), 27)
+			t.is(sumOfArray([]), 0)
+		})
 
-	test('isVowel()', t => {
-		t.is(isVowel(0), false)
-		t.is(isVowel('B'), false)
-		t.is(isVowel('b'), false)
-		t.is(isVowel('a'), true)
-		t.is(isVowel('E'), true)
-	})
+		test('isVowel()', t => {
+			t.is(isVowel(0), false)
+			t.is(isVowel('B'), false)
+			t.is(isVowel('b'), false)
+			t.is(isVowel('a'), true)
+			t.is(isVowel('E'), true)
+		})
 
-	test('rovarspraket()', t => {
-		t.is(rovarspraket('a'), 'a')
-		t.is(rovarspraket('b'), 'bob')
-		t.is(rovarspraket('cat'), 'cocatot')
-		t.is(rovarspraket('javascript'), 'jojavovasoscocroripoptot')
-		t.is(rovarspraket(0), '0')
-	})
+		test('rovarspraket()', t => {
+			t.is(rovarspraket('a'), 'a')
+			t.is(rovarspraket('b'), 'bob')
+			t.is(rovarspraket('cat'), 'cocatot')
+			t.is(rovarspraket('javascript'), 'jojavovasoscocroripoptot')
+			t.is(rovarspraket(0), '0')
+		})
 
-	test('reverse()', t => {
-		t.is(reverse('books'), 'skoob')
-		t.is(reverse("we don't want no trouble"), "elbuort on tnaw t'nod ew")
-	})
+		test('reverse()', t => {
+			t.is(reverse('books'), 'skoob')
+			t.is(reverse("we don't want no trouble"), "elbuort on tnaw t'nod ew")
+		})
 
-	test('findLongestWord()', t => {
-		t.is(findLongestWord('book dogs'), 'book')
-		t.is(findLongestWord('life the universe and everything'), 'everything')
-	})
-	// from Code Wars
-	test('remove()', t => {
-		t.is(remove('Hi!'), 'Hi!')
-		t.is(remove('Hi!!!'), 'Hi!')
-		t.is(remove('!Hi'), 'Hi!')
-		t.is(remove('!Hi!'), 'Hi!')
-		t.is(remove('Hi! Hi!'), 'Hi Hi!')
-		t.is(remove('Hi'), 'Hi!')
-	})
+		test('findLongestWord()', t => {
+			t.is(findLongestWord('book dogs'), 'book')
+			t.is(findLongestWord('life the universe and everything'), 'everything')
+		})
+		// from Code Wars
+		test('remove()', t => {
+			t.is(remove('Hi!'), 'Hi!')
+			t.is(remove('Hi!!!'), 'Hi!')
+			t.is(remove('!Hi'), 'Hi!')
+			t.is(remove('!Hi!'), 'Hi!')
+			t.is(remove('Hi! Hi!'), 'Hi Hi!')
+			t.is(remove('Hi'), 'Hi!')
+		})
 
-	test('alphabetWar()', t => {
-		t.is(alphabetWar("z"), "Right side wins!")
-		t.is(alphabetWar("zdqmwpbs"), "Let's fight again!")
-		t.is(alphabetWar("zzzzs"), "Right side wins!")
-		t.is(alphabetWar("wwwwww"), "Left side wins!")
-	})
-	test('findOutlier()', t => {
-		t.is(findOutlier([0, 1, 2]), 1)
-		t.is(findOutlier([1, 2, 3]), 2)
-		t.is(findOutlier([2, 6, 8, 10, 3]), 3)
-		t.is(findOutlier([0, 0, 3, 0, 0]), 3)
-		t.is(findOutlier([1, 1, 0, 1, 1]), 0)
-	})
+		test('alphabetWar()', t => {
+			t.is(alphabetWar("z"), "Right side wins!")
+			t.is(alphabetWar("zdqmwpbs"), "Let's fight again!")
+			t.is(alphabetWar("zzzzs"), "Right side wins!")
+			t.is(alphabetWar("wwwwww"), "Left side wins!")
+		})
+		test('findOutlier()', t => {
+			t.is(findOutlier([0, 1, 2]), 1)
+			t.is(findOutlier([1, 2, 3]), 2)
+			t.is(findOutlier([2, 6, 8, 10, 3]), 3)
+			t.is(findOutlier([0, 0, 3, 0, 0]), 3)
+			t.is(findOutlier([1, 1, 0, 1, 1]), 0)
+		})
 
-	test('longest()', t => {
-		t.is(longest("aretheyhere", "yestheyarehere"), "aehrsty")
-		t.is(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
-		t.is(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
-	})
+		test('longest()', t => {
+			t.is(longest("aretheyhere", "yestheyarehere"), "aehrsty")
+			t.is(longest("loopingisfunbutdangerous", "lessdangerousthancoding"), "abcdefghilnoprstu")
+			t.is(longest("inmanylanguages", "theresapairoffunctions"), "acefghilmnoprstuy")
+		})
 
-	test("smallEnough()", t => {
-		t.is(smallEnough([66, 101], 200), true);
-		t.is(smallEnough([78, 117, 110, 99, 104, 117, 107, 115], 100), false);
-		t.is(smallEnough([101, 45, 75, 105, 99, 107], 107), true);
-		t.is(smallEnough([80, 117, 115, 104, 45, 85, 112, 115], 120), true);
-	})
+		test("smallEnough()", t => {
+			t.is(smallEnough([66, 101], 200), true);
+			t.is(smallEnough([78, 117, 110, 99, 104, 117, 107, 115], 100), false);
+			t.is(smallEnough([101, 45, 75, 105, 99, 107], 107), true);
+			t.is(smallEnough([80, 117, 115, 104, 45, 85, 112, 115], 120), true);
+		})
 
-	test("largestArrangement()", t => {
-		t.is(largestArrangement([8, 6, 590, 70]), 8706590)
-		t.is(largestArrangement([6, 73, 79, 356, 7]), 797736356)
-		t.is(largestArrangement([64, 29, 5, 9, 982, 3]), 9982645329)
-		t.is(largestArrangement([3487, 103559, 243]), 3487243103559)
-		t.is(largestArrangement([7, 78, 79, 72, 709, 7, 94]), 9479787772709)
-	})
-	test("moveTen()", t => {
-		t.is(moveTen("testcase"), "docdmkco");
-		t.is(moveTen("codewars"), "mynogkbc");
-		t.is(moveTen("exampletesthere"), "ohkwzvodocdrobo");
-	});
-	test("prettyTimeFormat()", t => {
-		t.is((0), "0");
-		t.is(prettyTimeFormat(1.8342), "1");
-		t.is(prettyTimeFormat(50), "50");
-		t.is(prettyTimeFormat(9), "9");
-		t.is(prettyTimeFormat(9.8), "9");
-		t.is(prettyTimeFormat(90), "1:30");
-		t.is(prettyTimeFormat(1989), "33:09");
-		t.is(prettyTimeFormat(14989), "4:09:49");
-		t.is(prettyTimeFormat(84989), "23:36:29");
-		t.is(prettyTimeFormat(5114989), "1420:49:49");
-	});
-	test("XO()", t => {
-		t.is(XO('xo'), true);
-		t.is(XO("xxOo"), true);
-		t.is(XO("xxxm"), false);
-		t.is(XO("Oo"), false);
-		t.is(XO("ooom"), false);
-	})
+		test("largestArrangement()", t => {
+			t.is(largestArrangement([8, 6, 590, 70]), 8706590)
+			t.is(largestArrangement([6, 73, 79, 356, 7]), 797736356)
+			t.is(largestArrangement([64, 29, 5, 9, 982, 3]), 9982645329)
+			t.is(largestArrangement([3487, 103559, 243]), 3487243103559)
+			t.is(largestArrangement([7, 78, 79, 72, 709, 7, 94]), 9479787772709)
+		})
+		test("moveTen()", t => {
+			t.is(moveTen("testcase"), "docdmkco");
+			t.is(moveTen("codewars"), "mynogkbc");
+			t.is(moveTen("exampletesthere"), "ohkwzvodocdrobo");
+		});
+		test("prettyTimeFormat()", t => {
+			t.is((0), "0");
+			t.is(prettyTimeFormat(1.8342), "1");
+			t.is(prettyTimeFormat(50), "50");
+			t.is(prettyTimeFormat(9), "9");
+			t.is(prettyTimeFormat(9.8), "9");
+			t.is(prettyTimeFormat(90), "1:30");
+			t.is(prettyTimeFormat(1989), "33:09");
+			t.is(prettyTimeFormat(14989), "4:09:49");
+			t.is(prettyTimeFormat(84989), "23:36:29");
+			t.is(prettyTimeFormat(5114989), "1420:49:49");
+		});
+		test("XO()", t => {
+			t.is(XO('xo'), true);
+			t.is(XO("xxOo"), true);
+			t.is(XO("xxxm"), false);
+			t.is(XO("Oo"), false);
+			t.is(XO("ooom"), false);
+		})
 
-	test("abbrevName()", t => {
-		t.is(abbrevName("Sam Harris"), "S.H");
-		t.is(abbrevName("Patrick Feenan"), "P.F");
-		t.is(abbrevName("Evan Cole"), "E.C");
-		t.is(abbrevName("P Favuzzi"), "P.F");
-		t.is(abbrevName("David Mendieta"), "D.M");
-	})
-	test("findShort()", t => {
-		t.is(findShort("bitcoin take over the world maybe who knows perhaps"), 3);
-		t.is(findShort("turns out random test cases are easier than writing out basic ones"), 3);
-	});
-	test("trouble()", t => {
-		t.is(trouble([1, 3, 5, 6, 7, 4, 3], 7), [1, 3, 5, 6, 7, 4]);
-		t.is(trouble([4, 1, 1, 1, 4], 2), [4, 1, 4]);
-		t.is(trouble([2, 2, 2, 2, 2, 2], 4), [2]);
-	});
-	test("check()", t => {
-		t.is(check([66, 101], 66), true);
-		t.is(check([80, 117, 115, 104, 45, 85, 112, 115], 45), true);
-		t.is(check(['t', 'e', 's', 't'], 'e'), true);
-		t.is(check(['what', 'a', 'great', 'kata'], 'kat'), false);
-	})
-	test("solution()", t => {
-		t.is(solution("XII"), 12);
-		t.is(solution("IX"), 9);
-		t.is(solution("VM"), 995);
-		t.is(solution("MMDLIX"), 2559);
-	})
-	test("distinct()", t => {
-		t.is(distinct([1]), [1]);
-		t.is(distinct([1, 2]), [1, 2]);
-		t.is(distinct([1, 1, 2]), [1, 2]);
-	})
-	test("maxNumber()", t => {
-		t.is(maxNumber(213), 321);
-		t.is(maxNumber(7389), 9873);
-		t.is(maxNumber(63792), 97632);
-		t.is(maxNumber(566797), 977665);
-		t.is(maxNumber(1000000), 1000000);
-	});
-	test("makePassword()", t => {
-		t.is(makePassword("Give me liberty or give me death"), "Gml0gmd", "Wrong output for 'Give me liberty or give me death'");
-		t.is(makePassword("Keep Calm and Carry On"), "KCaC0", "Wrong output for 'Keep Calm and Carry On'");
-	});
-	test("binaryArrayToNumber()", t => {
-		t.is(binaryArrayToNumber([0, 0, 0, 1]), 1);
-		t.is(binaryArrayToNumber([0, 0, 1, 0]), 2);
-		t.is(binaryArrayToNumber([1, 1, 1, 1]), 15);
-		t.is(binaryArrayToNumber([0, 1, 1, 0]), 6);
-	});
-	test('Edge tests', t => {
-		t.is(oddOrEven([0]), 'even')
-		t.is(oddOrEven([1]), 'odd')
-		t.is(oddOrEven([]), 'even')
-		t.is(oddOrEven([0, 1, 5]), 'even')
-		t.is(oddOrEven([0, 1, 3]), 'even')
-		t.is(oddOrEven([1023, 1, 2]), 'even')
-		t.is(oddOrEven([0, -1, -5]), 'even')
-		t.is(oddOrEven([0, -1, -3]), 'even')
-		t.is(oddOrEven([-1023, 1, -2]), 'even')
-		t.is(oddOrEven([0, 1, 2]), 'odd')
-		t.is(oddOrEven([0, 1, 4]), 'odd')
-		t.is(oddOrEven([1023, 1, 3]), 'odd')
-		t.is(oddOrEven([0, -1, 2]), 'odd')
-		t.is(oddOrEven([0, 1, -4]), 'odd')
-		t.is(oddOrEven([-1023, -1, 3]), 'odd')
-	});
-	test("DNAStrand()" t => {
-		t.is(DNAStrand("AAAA"), "TTTT", "String AAAA is");
-		t.is(DNAStrand("ATTGC"), "TAACG", "String ATTGC is");
-		t.is(DNAStrand("GTAT"), "CATA", "String GTAT is");
-	})
+		test("abbrevName()", t => {
+			t.is(abbrevName("Sam Harris"), "S.H");
+			t.is(abbrevName("Patrick Feenan"), "P.F");
+			t.is(abbrevName("Evan Cole"), "E.C");
+			t.is(abbrevName("P Favuzzi"), "P.F");
+			t.is(abbrevName("David Mendieta"), "D.M");
+		})
+		test("findShort()", t => {
+			t.is(findShort("bitcoin take over the world maybe who knows perhaps"), 3);
+			t.is(findShort("turns out random test cases are easier than writing out basic ones"), 3);
+		});
+		test("trouble()", t => {
+			t.is(trouble([1, 3, 5, 6, 7, 4, 3], 7), [1, 3, 5, 6, 7, 4]);
+			t.is(trouble([4, 1, 1, 1, 4], 2), [4, 1, 4]);
+			t.is(trouble([2, 2, 2, 2, 2, 2], 4), [2]);
+		});
+		test("check()", t => {
+			t.is(check([66, 101], 66), true);
+			t.is(check([80, 117, 115, 104, 45, 85, 112, 115], 45), true);
+			t.is(check(['t', 'e', 's', 't'], 'e'), true);
+			t.is(check(['what', 'a', 'great', 'kata'], 'kat'), false);
+		})
+		test("solution()", t => {
+			t.is(solution("XII"), 12);
+			t.is(solution("IX"), 9);
+			t.is(solution("VM"), 995);
+			t.is(solution("MMDLIX"), 2559);
+		})
+		test("distinct()", t => {
+			t.is(distinct([1]), [1]);
+			t.is(distinct([1, 2]), [1, 2]);
+			t.is(distinct([1, 1, 2]), [1, 2]);
+		})
+		test("maxNumber()", t => {
+			t.is(maxNumber(213), 321);
+			t.is(maxNumber(7389), 9873);
+			t.is(maxNumber(63792), 97632);
+			t.is(maxNumber(566797), 977665);
+			t.is(maxNumber(1000000), 1000000);
+		});
+		test("makePassword()", t => {
+			t.is(makePassword("Give me liberty or give me death"), "Gml0gmd", "Wrong output for 'Give me liberty or give me death'");
+			t.is(makePassword("Keep Calm and Carry On"), "KCaC0", "Wrong output for 'Keep Calm and Carry On'");
+		});
+		test("binaryArrayToNumber()", t => {
+			t.is(binaryArrayToNumber([0, 0, 0, 1]), 1);
+			t.is(binaryArrayToNumber([0, 0, 1, 0]), 2);
+			t.is(binaryArrayToNumber([1, 1, 1, 1]), 15);
+			t.is(binaryArrayToNumber([0, 1, 1, 0]), 6);
+		});
+		test('Edge tests', t => {
+			t.is(oddOrEven([0]), 'even')
+			t.is(oddOrEven([1]), 'odd')
+			t.is(oddOrEven([]), 'even')
+			t.is(oddOrEven([0, 1, 5]), 'even')
+			t.is(oddOrEven([0, 1, 3]), 'even')
+			t.is(oddOrEven([1023, 1, 2]), 'even')
+			t.is(oddOrEven([0, -1, -5]), 'even')
+			t.is(oddOrEven([0, -1, -3]), 'even')
+			t.is(oddOrEven([-1023, 1, -2]), 'even')
+			t.is(oddOrEven([0, 1, 2]), 'odd')
+			t.is(oddOrEven([0, 1, 4]), 'odd')
+			t.is(oddOrEven([1023, 1, 3]), 'odd')
+			t.is(oddOrEven([0, -1, 2]), 'odd')
+			t.is(oddOrEven([0, 1, -4]), 'odd')
+			t.is(oddOrEven([-1023, -1, 3]), 'odd')
+		});
+		test("DNAStrand()" t => {
+			t.is(DNAStrand("AAAA"), "TTTT", "String AAAA is");
+			t.is(DNAStrand("ATTGC"), "TAACG", "String ATTGC is");
+			t.is(DNAStrand("GTAT"), "CATA", "String GTAT is");
+		})
 
-	test("minValue", t => {
-		t.is(minValue([1, 3, 1]), 13);
-		t.is(minValue([4, 7, 5, 7]), 457);
-		t.is(minValue([4, 8, 1, 4]), 148);
-		t.is(minValue([5, 7, 9, 5, 7]), 579);
-		t.is(minValue([6, 7, 8, 7, 6, 6]), 678);
-		t.is(minValue([5, 6, 9, 9, 7, 6, 4]), 45679);
-		t.is(minValue([1, 9, 1, 3, 7, 4, 6, 6, 7]), 134679);
-		t.is(minValue([3, 6, 5, 5, 9, 8, 7, 6, 3, 5, 9]), 356789);
-		t.is(minValue([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]), 1);
-		t.is(minValue([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 0);
-	});
-	test("vowelBack()", t => {
-		t.is(vowelBack("testcase"), "tabtbvba");
-		t.is(vowelBack("codewars"), "bnaafvab");
-		t.is(vowelBack("exampletesthere"), "agvvyuatabtqaaa");
-	});
-	test("inverseSlice()", t => {
-		t.is(inverseSlice([12, 14, 63, 72, 55, 24], 2, 4), [12, 14, 55, 24]);
-		t.is(inverseSlice([12, 14, 63, 72, 55, 24], 0, 3), [72, 55, 24]);
-		t.is(inverseSlice(['Intuition', 'is', 'a', 'poor', 'guide', 'when', 'facing', 'probabilistic', 'evidence'], 5, 13), ['Intuition', 'is', 'a', 'poor', 'guide']);
-	});
+		test("minValue", t => {
+			t.is(minValue([1, 3, 1]), 13);
+			t.is(minValue([4, 7, 5, 7]), 457);
+			t.is(minValue([4, 8, 1, 4]), 148);
+			t.is(minValue([5, 7, 9, 5, 7]), 579);
+			t.is(minValue([6, 7, 8, 7, 6, 6]), 678);
+			t.is(minValue([5, 6, 9, 9, 7, 6, 4]), 45679);
+			t.is(minValue([1, 9, 1, 3, 7, 4, 6, 6, 7]), 134679);
+			t.is(minValue([3, 6, 5, 5, 9, 8, 7, 6, 3, 5, 9]), 356789);
+			t.is(minValue([1, 1, 1, 1, 1, 1, 1, 1, 1, 1]), 1);
+			t.is(minValue([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]), 0);
+		});
+		test("vowelBack()", t => {
+			t.is(vowelBack("testcase"), "tabtbvba");
+			t.is(vowelBack("codewars"), "bnaafvab");
+			t.is(vowelBack("exampletesthere"), "agvvyuatabtqaaa");
+		});
+		test("inverseSlice()", t => {
+			t.is(inverseSlice([12, 14, 63, 72, 55, 24], 2, 4), [12, 14, 55, 24]);
+			t.is(inverseSlice([12, 14, 63, 72, 55, 24], 0, 3), [72, 55, 24]);
+			t.is(inverseSlice(['Intuition', 'is', 'a', 'poor', 'guide', 'when', 'facing', 'probabilistic', 'evidence'], 5, 13), ['Intuition', 'is', 'a', 'poor', 'guide']);
+		});
+		test("alphabetWar()", t => {
+
+			t.is(alphabetWar("z"), "Right side wins!");
+			t.is(alphabetWar("****"), "Let's fight again!");
+			t.is(alphabetWar("z*dq*mw*pb*s"), "Let's fight again!");
+			t.is(alphabetWar("zdqmwpbs"), "Let's fight again!");
+			t.is(alphabetWar("zz*zzs"), "Right side wins!");
+			t.is(alphabetWar("sz**z**zs"), "Left side wins!");
+			t.is(alphabetWar("z*z*z*zs"), "Left side wins!");
+			t.is(alphabetWar("*wwwwww*z*"), "Left side wins!");
+		});
