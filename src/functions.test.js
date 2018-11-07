@@ -125,7 +125,7 @@ function rovarspraket(x) {
 	if (isNaN(x)) {
 		let x2 = x.split('')
 		let x3 = ''
-		x2.forEach(function(letter) {
+		x2.forEach(function (letter) {
 			if (!!~'aeiou'.indexOf(letter)) {
 				x3 += letter
 			} else {
@@ -171,19 +171,10 @@ function findLongestWord(string) {
 	}
 	return word
 }
-// from  Code Wars
-
-function remove(s) {
-	return s.split('!').join('') + '!'
-}
 
 // ...
 
-/**
- * NOTE: Don't modify anything below this line...
- */
 
-/* eslint-disable no-undef */
 
 import test from 'ava'
 
@@ -241,15 +232,4 @@ test('reverse()', t => {
 test('findLongestWord()', t => {
 	t.is(findLongestWord('book dogs'), 'book')
 	t.is(findLongestWord('life the universe and everything'), 'everything')
-})
-// from Code Wars
-test('remove()', t => {
-	t.is(remove('Hi!'), 'Hi!')
-	t.is(remove('Hi!!!'), 'Hi!')
-	t.is(remove('!Hi'), 'Hi!')
-	t.is(remove('!Hi!'), 'Hi!')
-	t.is(remove('Hi! Hi!'), 'Hi Hi!')
-	t.is(remove('Hi'), 'Hi!')
-})
-
-/* eslint-enable */
+});
