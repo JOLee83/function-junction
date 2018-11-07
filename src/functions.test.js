@@ -766,7 +766,6 @@ function prettyTimeFormat(seconds) {
 			t.is(inverseSlice(['Intuition', 'is', 'a', 'poor', 'guide', 'when', 'facing', 'probabilistic', 'evidence'], 5, 13), ['Intuition', 'is', 'a', 'poor', 'guide']);
 		});
 		test("alphabetWar()", t => {
-
 			t.is(alphabetWar("z"), "Right side wins!");
 			t.is(alphabetWar("****"), "Let's fight again!");
 			t.is(alphabetWar("z*dq*mw*pb*s"), "Let's fight again!");
